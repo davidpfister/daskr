@@ -7,12 +7,13 @@ the hope to be modernized some day.
 At the moment, as compared to the original code, it has been restructured to be compatible with **fpm** build system.
 
 TODO list
-- [] remove implicite typing
-- [] remove goto's
-- [] Create explicit interfaces to pass residual, jacobian and krilov solver.
-- [] Split direct and krylov solvers.
-- [] Replace linpack linear solver for Lapack
-- [] Create a modern documentation site
+- [x] Use fpm as build system
+- [ ] Remove implicite typing
+- [ ] Remove goto's
+- [ ] Create explicit interfaces to pass residual, jacobian and krilov solver.
+- [ ] Split direct and krylov solvers.
+- [ ] Replace linpack linear solver for Lapack
+- [ ] Create a modern documentation site
 
 Since the code is a the the moment F77 fixed-form it should be compiled with the option `-std=legacy`. 
 
