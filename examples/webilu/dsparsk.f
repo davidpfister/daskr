@@ -12,7 +12,7 @@ c aplsca :   Computes     A:= A + s I    (s = scalar)                  c
 c----------------------------------------------------------------------c 
       subroutine aplb (nrow,ncol,job,a,ja,ia,b,jb,ib,
      *     c,jc,ic,nzmax,iw,ierr)
-      real   a(*), b(*), c(*) 
+      real*8 a(*), b(*), c(*) 
       integer ja(*),jb(*),jc(*),ia(nrow+1),ib(nrow+1),ic(nrow+1),
      *     iw(ncol)
 c-----------------------------------------------------------------------
@@ -101,7 +101,7 @@ c------------end of aplb -----------------------------------------------
 c-----------------------------------------------------------------------
       end
       subroutine aplb1(nrow,ncol,job,a,ja,ia,b,jb,ib,c,jc,ic,nzmax,ierr)
-      real   a(*), b(*), c(*) 
+      real*8 a(*), b(*), c(*) 
       integer ja(*),jb(*),jc(*),ia(nrow+1),ib(nrow+1),ic(nrow+1)
 c-----------------------------------------------------------------------
 c performs the matrix sum  C = A+B for matrices in sorted CSR format.
@@ -201,7 +201,7 @@ c-----------------------------------------------------------------------
       end
       subroutine aplsb (nrow,ncol,a,ja,ia,s,b,jb,ib,c,jc,ic,
      *     nzmax,ierr)
-      real   a(*), b(*), c(*), s
+      real*8 a(*), b(*), c(*), s
       integer ja(*),jb(*),jc(*),ia(nrow+1),ib(nrow+1),ic(nrow+1)
 c-----------------------------------------------------------------------
 c performs the operation C = A+s B for matrices in sorted CSR format.
@@ -310,7 +310,7 @@ c------------end-of-aplsb ---------------------------------------------
 c-----------------------------------------------------------------------
       end
       subroutine diamua (nrow,job, a, ja, ia, diag, b, jb, ib)
-      real   a(*), b(*), diag(nrow), scal
+      real*8 a(*), b(*), diag(nrow), scal
       integer ja(*),jb(*), ia(nrow+1),ib(nrow+1) 
 c-----------------------------------------------------------------------
 c performs the matrix by matrix product B = Diag * A  (in place) 
@@ -366,7 +366,7 @@ c----------end-of-diamua------------------------------------------------
 c-----------------------------------------------------------------------
       end 
       subroutine amudia (nrow,job, a, ja, ia, diag, b, jb, ib)
-      real   a(*), b(*), diag(nrow) 
+      real*8 a(*), b(*), diag(nrow) 
       integer ja(*),jb(*), ia(nrow+1),ib(nrow+1) 
 c-----------------------------------------------------------------------
 c performs the matrix by matrix product B = A * Diag  (in place) 
@@ -420,7 +420,7 @@ c-----------------------------------------------------------------------
 c-----------end-of-amudiag----------------------------------------------
       end 
       subroutine aplsca (nrow, a, ja, ia, scal,iw) 
-      real   a(*), scal
+      real*8 a(*), scal
       integer ja(*), ia(nrow+1),iw(*)
 c-----------------------------------------------------------------------
 c Adds a scalar to the diagonal entries of a sparse matrix A :=A + s I 
@@ -523,7 +523,7 @@ c----------------------------------------------------------------------c
 c amux  : A times a vector. Compressed Sparse Row (CSR) format.        c
 c----------------------------------------------------------------------c
       subroutine amux (n, x, y, a,ja,ia) 
-      real    x(*), y(*), a(*) 
+      real*8  x(*), y(*), a(*) 
       integer n, ja(*), ia(*)
 c-----------------------------------------------------------------------
 c         A times a vector
@@ -546,14 +546,14 @@ c
 c-----------------------------------------------------------------------
 c local variables
 c
-      real   t
+      real*8 t
       integer i, k
 c-----------------------------------------------------------------------
       do 100 i = 1,n
 c
 c     compute the inner product of row i with vector x
 c 
-         t = 0.0e0
+         t = 0.0d0
          do 99 k=ia(i), ia(i+1)-1 
             t = t + a(k)*x(ja(k))
  99      continue
@@ -587,7 +587,7 @@ c on entry:
 c---------
 c nrow   = number of rows in matrix
 c ncol	 = number of columns in matrix 
-c a	 = real   array containing the values of the matrix stored 
+c a	 = real*8 array containing the values of the matrix stored 
 c          columnwise
 c ja 	 = integer array of the same length as a containing the column
 c          indices of the corresponding matrix elements of array a.
@@ -663,7 +663,7 @@ c-----------------------------------------------------------------------
       integer totcrd, ptrcrd, indcrd, valcrd, rhscrd, nrow, ncol,
      1     nnz, nrhs, len, nperli, nrwindx
       integer ja(*), ia(*) 	
-      real   a(*),rhs(*)
+      real*8 a(*),rhs(*)
 c--------------
 c     compute pointer format
 c--------------
@@ -815,7 +815,7 @@ c csrbnd  : converts a compressed sparse row format into a banded      c
 c           format (linpack style).                                    c
 c----------------------------------------------------------------------c
       subroutine csrdns(nrow,ncol,a,ja,ia,dns,ndns,ierr) 
-      real   dns(ndns,*),a(*)
+      real*8 dns(ndns,*),a(*)
       integer ja(*),ia(*)
 c-----------------------------------------------------------------------
 c Compressed Sparse Row    to    Dense 
@@ -848,7 +848,7 @@ c-----------------------------------------------------------------------
       ierr = 0
       do 1 i=1, nrow
          do 2 j=1,ncol
-	    dns(i,j) = 0.0e0
+	    dns(i,j) = 0.0d0
  2       continue
  1    continue
 c     
@@ -868,7 +868,7 @@ c-----------------------------------------------------------------------
       end
       subroutine coocsr(nrow,nnz,a,ir,jc,ao,jao,iao)
 c----------------------------------------------------------------------- 
-      real   a(*),ao(*),x
+      real*8 a(*),ao(*),x
       integer ir(*),jc(*),jao(*),iao(*)
 c-----------------------------------------------------------------------
 c  Coordinate     to   Compressed Sparse Row 
@@ -935,7 +935,7 @@ c-----------------------------------------------------------------------
       end
       subroutine coicsr (n,nnz,job,a,ja,ia,iwk)
       integer ia(nnz),ja(nnz),iwk(n+1) 
-      real   a(*)
+      real*8 a(*)
 c------------------------------------------------------------------------
 c IN-PLACE coo-csr conversion routine.
 c------------------------------------------------------------------------
@@ -971,7 +971,7 @@ c         if you want them sorted.
 c----------------------------------------------------------------------c
 c  Coded by Y. Saad, Sep. 26 1989                                      c
 c----------------------------------------------------------------------c
-      real   t,tnext
+      real*8 t,tnext
       logical values
 c----------------------------------------------------------------------- 
       values = (job .eq. 1) 
@@ -1033,7 +1033,7 @@ c------------------------------------------------------------------------
       end
       subroutine csrcoo (nrow,job,nzmax,a,ja,ia,nnz,ao,ir,jc,ierr)
 c-----------------------------------------------------------------------
-      real   a(*),ao(*) 
+      real*8 a(*),ao(*) 
       integer ir(*),jc(*),ja(*),ia(nrow+1) 
 c----------------------------------------------------------------------- 
 c  Compressed Sparse Row      to      Coordinate 
@@ -1109,7 +1109,7 @@ c-----------------------------------------------------------------------
       end
       subroutine csrcsc (n,job,ipos,a,ja,ia,ao,jao,iao)
       integer ia(n+1),iao(n+1),ja(*),jao(*)
-      real    a(*),ao(*)
+      real*8  a(*),ao(*)
 c-----------------------------------------------------------------------
 c Compressed Sparse Row     to      Compressed Sparse Column
 c
@@ -1150,7 +1150,7 @@ c-----------------------------------------------------------------------
       end
       subroutine csrcsc2 (n,n2,job,ipos,a,ja,ia,ao,jao,iao)
       integer ia(n+1),iao(n2+1),ja(*),jao(*)
-      real    a(*),ao(*)
+      real*8  a(*),ao(*)
 c-----------------------------------------------------------------------
 c Compressed Sparse Row     to      Compressed Sparse Column
 c
@@ -1226,7 +1226,7 @@ c-----------------------------------------------------------------------
       end
       subroutine csrdia (n,idiag,job,a,ja,ia,ndiag,
      *                   diag,ioff,ao,jao,iao,ind)
-      real   diag(ndiag,idiag), a(*), ao(*)
+      real*8 diag(ndiag,idiag), a(*), ao(*)
       integer ia(*), ind(*), ja(*), jao(*), iao(*), ioff(*)
 c----------------------------------------------------------------------- 
 c Compressed sparse row     to    diagonal format
@@ -1330,7 +1330,7 @@ c---------------- initialize diago to zero -----------------------------
  50   continue
       do 55 j=1,idiag
          do 54 i=1,n
-            diag(i,j) = 0.0e0
+            diag(i,j) = 0.0d0
  54      continue
  55   continue
 c----------------------------------------------------------------------- 
@@ -1365,7 +1365,7 @@ c----------- end of csrdia ---------------------------------------------
 c-----------------------------------------------------------------------
       end
       subroutine csrbnd (n,a,ja,ia,job,abd,nabd,lowd,ml,mu,ierr)
-      real   a(*),abd(nabd,n)
+      real*8 a(*),abd(nabd,n)
       integer ia(n+1),ja(*)
 c----------------------------------------------------------------------- 
 c   Compressed Sparse Row  to  Banded (Linpack ) format.
@@ -1488,7 +1488,7 @@ c------------
       do 15  i=1,m
          ii = lowd -i+1
          do 10 j=1,n
-	    abd(ii,j) = 0.0e0
+	    abd(ii,j) = 0.0d0
  10      continue
  15   continue
 c---------------------------------------------------------------------	   
@@ -1521,7 +1521,7 @@ c roscal : scales the rows of a matrix by their norms.                 c
 c----------------------------------------------------------------------c
       subroutine rperm (nrow,a,ja,ia,ao,jao,iao,perm,job)
       integer nrow,ja(*),ia(nrow+1),jao(*),iao(nrow+1),perm(nrow),job
-      real   a(*),ao(*) 
+      real*8 a(*),ao(*) 
 c-----------------------------------------------------------------------
 c this subroutine permutes the rows of a matrix in CSR format. 
 c rperm  computes B = P A  where P is a permutation matrix.  
@@ -1593,7 +1593,7 @@ c-----------------------------------------------------------------------
       end
       subroutine cperm (nrow,a,ja,ia,ao,jao,iao,perm,job) 
       integer nrow,ja(*),ia(nrow+1),jao(*),iao(nrow+1),perm(*), job
-      real   a(*), ao(*) 
+      real*8 a(*), ao(*) 
 c-----------------------------------------------------------------------
 c this subroutine permutes the columns of a matrix a, ja, ia.
 c the result is written in the output matrix  ao, jao, iao.
@@ -1661,7 +1661,7 @@ c-----------------------------------------------------------------------
       subroutine dperm (nrow,a,ja,ia,ao,jao,iao,perm,qperm,job)
       integer nrow,ja(*),ia(nrow+1),jao(*),iao(nrow+1),perm(nrow),
      +        qperm(*),job
-      real   a(*),ao(*) 
+      real*8 a(*),ao(*) 
 c-----------------------------------------------------------------------
 c This routine permutes the rows and columns of a matrix stored in CSR
 c format. i.e., it computes P A Q, where P, Q are permutation matrices. 
@@ -1735,7 +1735,7 @@ c-----------------------------------------------------------------------
       end
       subroutine dvperm (n, x, perm) 
       integer n, perm(n) 
-      real   x(n)
+      real*8 x(n)
 c-----------------------------------------------------------------------
 c this subroutine performs an in-place permutation of a real vector x 
 c according to the permutation array perm(*), i.e., on return, 
@@ -1758,7 +1758,7 @@ c----------------------------------------------------------------------c
 c           Y. Saad, Sep. 21 1989                                      c
 c----------------------------------------------------------------------c
 c local variables 
-      real   tmp, tmp1
+      real*8 tmp, tmp1
 c
       init      = 1
       tmp	= x(init)	
@@ -1944,7 +1944,7 @@ c       mu = max ( (j-i)  s.t. a(i,j) .ne. 0  )
 c----------------------------------------------------------------------c
 c Y. Saad, Sep. 21 1989                                                c
 c----------------------------------------------------------------------c
-      real   a(*) 
+      real*8 a(*) 
       integer ja(*),ia(n+1),ml,mu,ldist,i,k 
       ml = - n
       mu = - n
@@ -2009,7 +2009,7 @@ c------end-of-infdia ---------------------------------------------------
 c-----------------------------------------------------------------------
       end
       subroutine rnrms   (nrow, nrm, a, ja, ia, diag) 
-      real   a(*), diag(nrow), scal 
+      real*8 a(*), diag(nrow), scal 
       integer ja(*), ia(nrow+1) 
 c-----------------------------------------------------------------------
 c gets the norms of each row of A. (choice of three norms)
@@ -2035,7 +2035,7 @@ c-----------------------------------------------------------------
 c
 c     compute the norm if each element.
 c     
-         scal = 0.0e0
+         scal = 0.0d0
          k1 = ia(ii)
          k2 = ia(ii+1)-1
          if (nrm .eq. 0) then
@@ -2059,7 +2059,7 @@ c-----------------------------------------------------------------------
 c-------------end-of-rnrms----------------------------------------------
       end 
       subroutine roscal(nrow,job,nrm,a,ja,ia,diag,b,jb,ib,ierr) 
-      real   a(*), b(*), diag(nrow) 
+      real*8 a(*), b(*), diag(nrow) 
       integer nrow,job,nrm,ja(*),jb(*),ia(nrow+1),ib(nrow+1),ierr 
 c-----------------------------------------------------------------------
 c scales the rows of A such that their norms are one on return
@@ -2100,11 +2100,11 @@ c-----------------------------------------------------------------
       call rnrms (nrow,nrm,a,ja,ia,diag)
       ierr = 0
       do 1 j=1, nrow
-         if (diag(j) .eq. 0.0e0) then
+         if (diag(j) .eq. 0.0d0) then
             ierr = j 
             return
          else
-            diag(j) = 1.0e0/diag(j)
+            diag(j) = 1.0d0/diag(j)
          endif
  1    continue
       call diamua(nrow,job,a,ja,ia,diag,b,jb,ib)
@@ -2127,7 +2127,7 @@ c----------------------------------------------------------------------c
 c-----------------------------------------------------------------------
       implicit none 
       integer n 
-      real   a(*),alu(*),w(*),droptol
+      real*8 a(*),alu(*),w(n),droptol
       integer ja(*),ia(n+1),jlu(*),ju(n),jw(2*n),lfil,iwk,ierr
 c----------------------------------------------------------------------*
 c                      *** ILUT preconditioner ***                     *
@@ -2150,7 +2150,7 @@ c           diagonal element). lfil must be .ge. 0.
 c           ** WARNING: THE MEANING OF LFIL HAS CHANGED WITH RESPECT TO
 c           EARLIER VERSIONS. 
 c
-c droptol = real. Sets the threshold for dropping small terms in the
+c droptol = real*8. Sets the threshold for dropping small terms in the
 c           factorization. See below for details on dropping strategy.
 c
 c  
@@ -2213,7 +2213,7 @@ c (however, fill-in is then mpredictible).                             *
 c----------------------------------------------------------------------*
 c     locals
       integer ju0,k,j1,j2,j,ii,i,lenl,lenu,jj,jrow,jpos,len 
-      real   tnorm, t, abs, s, fact 
+      real*8 tnorm, t, abs, s, fact 
       if (lfil .lt. 0) goto 998
 c-----------------------------------------------------------------------
 c     initialize ju0 (points to next element to be added to alu,jlu)
@@ -2233,11 +2233,11 @@ c-----------------------------------------------------------------------
       do 500 ii = 1, n
          j1 = ia(ii)
          j2 = ia(ii+1) - 1
-         tnorm = 0.0e0
+         tnorm = 0.0d0
          do 501 k=j1,j2
             tnorm = tnorm+abs(a(k))
  501     continue
-         if (tnorm .eq. 0.0e0) goto 999
+         if (tnorm .eq. 0.0d0) goto 999
          tnorm = tnorm/real(j2-j1+1)
 c     
 c     unpack L-part and U-part of row of A in arrays w 
@@ -2410,7 +2410,7 @@ c
          lenu = len+1
          len = min0(lenu,lfil)
 c
-         call qsplit (w(ii+1), jw(ii+1), lenu-1,len)
+         if (lenu .gt. 1) call qsplit (w(ii+1), jw(ii+1), lenu-1,len)
 c
 c     copy
 c 
@@ -2425,9 +2425,9 @@ c
 c     
 c     store inverse of diagonal element of u
 c     
-         if (w(ii) .eq. 0.0e0) w(ii) = (0.0001 + droptol)*tnorm
+         if (w(ii) .eq. 0.0d0) w(ii) = (0.0001 + droptol)*tnorm
 c     
-         alu(ii) = 1.0e0/ w(ii) 
+         alu(ii) = 1.0d0/ w(ii) 
 c     
 c     update pointer to beginning of next row of U.
 c     
@@ -2472,7 +2472,7 @@ c-----------------------------------------------------------------------
 c     implicit none
       integer n,ja(*),ia(n+1),lfil,jlu(*),ju(n),jw(2*n),iwk,
      *     iperm(2*n),ierr
-      real   a(*), alu(*), w(*), droptol
+      real*8 a(*), alu(*), w(n), droptol
 c----------------------------------------------------------------------*
 c       *** ILUTP preconditioner -- ILUT with pivoting  ***            *
 c      incomplete LU factorization with dual truncation mechanism      *
@@ -2493,7 +2493,7 @@ c           diagonal element). lfil must be .ge. 0.
 c           ** WARNING: THE MEANING OF LFIL HAS CHANGED WITH RESPECT TO
 c           EARLIER VERSIONS. 
 c
-c droptol = real. Sets the threshold for dropping small terms in the
+c droptol = real*8. Sets the threshold for dropping small terms in the
 c           factorization. See below for details on dropping strategy.
 c
 c lfil    = integer. The fill-in parameter. Each row of L and
@@ -2566,7 +2566,7 @@ c     local variables
 c
       integer k,i,j,jrow,ju0,ii,j1,j2,jpos,len,imax,lenu,lenl,jj,mbloc,
      *     icut
-      real   s, tmp, tnorm,xmax,xmax0, fact, abs, t, permtol
+      real*8 s, tmp, tnorm,xmax,xmax0, fact, abs, t, permtol
 c     
       if (lfil .lt. 0) goto 998
 c----------------------------------------------------------------------- 
@@ -2589,11 +2589,11 @@ c-----------------------------------------------------------------------
       do 500 ii = 1, n
          j1 = ia(ii)
          j2 = ia(ii+1) - 1
-         tnorm = 0.0e0
+         tnorm = 0.0d0
          do 501 k=j1,j2
             tnorm = tnorm+abs(a(k))
  501     continue
-         if (tnorm .eq. 0.0e0) goto 999
+         if (tnorm .eq. 0.0d0) goto 999
          tnorm = tnorm/(j2-j1+1)
 c
 c     unpack L-part and U-part of row of A in arrays  w  --
@@ -2767,7 +2767,7 @@ c
          enddo
          lenu = len+1
          len = min0(lenu,lfil)
-         call qsplit (w(ii+1), jw(ii+1), lenu-1,len)
+         if (lenu .gt. 1) call qsplit (w(ii+1), jw(ii+1), lenu-1,len)
 c
 c     determine next pivot -- 
 c
@@ -2815,8 +2815,8 @@ c
 c
 c     store inverse of diagonal element of u
 c
-        if (w(ii) .eq. 0.0e0) w(ii) = (1.0e-4 + droptol)*tnorm
-        alu(ii) = 1.0e0/ w(ii) 
+        if (w(ii) .eq. 0.0d0) w(ii) = (1.0D-4 + droptol)*tnorm
+        alu(ii) = 1.0d0/ w(ii) 
 c
 c     update pointer to beginning of next row of U.
 c
@@ -2869,7 +2869,7 @@ c----------------end-of-ilutp-------------------------------------------
 c-----------------------------------------------------------------------
       end
         subroutine qsplit(a,ind,n,ncut)
-        real   a(n)
+        real*8 a(n)
         integer ind(n), n, ncut
 c-----------------------------------------------------------------------
 c     does a quick-sort split of a real array.
@@ -2881,7 +2881,7 @@ c     abs(a(i)) .le. abs(a(ncut)) for i .gt. ncut
 c
 c     ind(1:n) is an integer array which permuted in the same way as a(*).
 c-----------------------------------------------------------------------
-        real   tmp, abskey
+        real*8 tmp, abskey
         integer itmp, first, last
 c-----
         first = 1
@@ -2928,7 +2928,7 @@ c----------------end-of-qsplit------------------------------------------
 c-----------------------------------------------------------------------
         end
         subroutine lusol(n, y, x, alu, jlu, ju)
-        real   x(n), y(n), alu(*)
+        real*8 x(n), y(n), alu(*)
 	integer n, jlu(*), ju(*)
 c-----------------------------------------------------------------------
 c
@@ -3366,12 +3366,12 @@ c     compressed sparse row format.
 
 c ... Input arguments:
       integer n
-      real   a(*)
+      real*8 a(*)
       integer ja(*)
       integer ia(n+1)
 
 c ... Output arguments:
-      real   b(*)
+      real*8 b(*)
       integer jb(*)
       integer ib(n+1)
 

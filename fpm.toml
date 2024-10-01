@@ -1,0 +1,44 @@
+name = "daskr"
+author = "P. N. Brown, A. C. Hindmarsh, and L. R. Petzold "
+description = "DAE solver"
+categories = ["dae","ode"]
+homepage = "https://www.netlib.org/ode/"
+
+
+[build]
+auto-executables = false
+auto-examples = true
+auto-tests = false
+
+[library]
+source-dir = "src"
+
+[fortran]
+implicit-external = true  # default: false
+source-form = "fixed"  # default: "free"
+implicit-typing = true  # default: false
+
+[[example]]
+name = "dem"
+source-dir = "examples/dem"
+main = "dkrdem.f"
+
+[[example]]
+name = "heat"
+source-dir = "examples/heat"
+main = "dheat.f"
+
+[[example]]
+name = "heatilu"
+source-dir = "examples/heatilu"
+main = "dheatilu.f"
+
+[[example]]
+name = "web"
+source-dir = "examples/web"
+main = "dweb.f"
+
+[[example]]
+name = "webilu"
+source-dir = "examples/webilu"
+main = "dwebilu.f"
