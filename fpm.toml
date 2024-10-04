@@ -7,7 +7,7 @@ homepage = "https://www.netlib.org/ode/"
 
 [build]
 auto-executables = false
-auto-examples = true
+auto-examples = false
 auto-tests = false
 
 [library]
@@ -15,30 +15,35 @@ source-dir = "src"
 
 [fortran]
 implicit-external = true  # default: false
-source-form = "fixed"  # default: "free"
+source-form = "free"  # default: "free"
 implicit-typing = true  # default: false
 
-[[example]]
-name = "dem"
-source-dir = "examples/dem"
-main = "dkrdem.f"
+# [[example]]
+# name = "dem"
+# source-dir = "examples/dem"
+# main = "dkrdem.f90"
 
 [[example]]
 name = "heat"
 source-dir = "examples/heat"
-main = "dheat.f"
+main = "dheat.f90"
 
 [[example]]
 name = "heatilu"
 source-dir = "examples/heatilu"
-main = "dheatilu.f"
+main = "dheatilu.f90"
+
+[[example]]
+name = "dem"
+source-dir = "examples/dem"
+main = "dkrdem.f90"
 
 [[example]]
 name = "web"
 source-dir = "examples/web"
-main = "dweb.f"
+main = "dweb.f90"
 
 [[example]]
 name = "webilu"
 source-dir = "examples/webilu"
-main = "dwebilu.f"
+main = "dwebilu.f90"
