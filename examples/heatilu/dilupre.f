@@ -882,18 +882,11 @@ C ... Work-array arguments:
       REAL*8 AWK(NNZMX)
       INTEGER JWK(NNZMX)
       INTEGER IWK(NEQP1)
-      INTEGER PERM(NEQ)   ! Integer array containing the permutation
-                          ! used in reordering the rows and columns of
-			  ! the Jacobian matrix.
-      INTEGER QPERM(NEQ)  ! Integer array holding the inverse of the
-			  ! permutation in array perm.
-      INTEGER LEVELS(NEQ) ! Work array used by the bfs reordering
-			  ! subroutine.   See subroutine BFS for
-			  ! more details.
-      INTEGER MASK(NEQ)	  ! Work array used by the BFS reordering
-			  ! subroutine.  See BFS subroutine.
-      INTEGER IREORDER    ! Flag used to determine if a reordering
-			  ! of the Jacobian matrix is desired.
+      INTEGER PERM(NEQ)   ! Integer array containing the permutation used in reordering the rows and columns of the Jacobian matrix.
+      INTEGER QPERM(NEQ)  ! Integer array holding the inverse of the permutation in array perm.
+      INTEGER LEVELS(NEQ) ! Work array used by the bfs reordering subroutine.   See subroutine BFS for more details.
+      INTEGER MASK(NEQ)	  ! Work array used by the BFS reordering subroutine.  See BFS subroutine.
+      INTEGER IREORDER    ! Flag used to determine if a reordering of the Jacobian matrix is desired.
 			  ! = 1 means a reverse Cuthill-McKee
 			  !     reordering of the rows and columns
 			  !     of the Jacobian is done.
